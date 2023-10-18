@@ -1,0 +1,100 @@
+name: ait_flutter_template
+
+packages:
+  - app/**
+  - core/**
+  - packages/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+scripts:
+  analyze:
+    exec: dart analyze .
+  build_runner:
+    exec:
+      concurrency: 6
+      failFast: true
+    run: flutter pub run build_runner build --delete-conflicting-outputs
+    description: Run a build_runner build in the ODM example app.
+    packageFilters:
+      dependsOn: "build_runner"
+  build_runner:watch:
+    exec:
+      concurrency: 6
+      failFast: true
+    run: flutter pub run build_runner watch --delete-conflicting-outputs
+    description: Run a build_runner build in the ODM example app.
+    packageFilters:
+      dependsOn: "build_runner"
+  build_runner:all:
+    run: melos run build_runner --no-select
+    description: run build runner for all package listed.
+  translate:
+    exec:
+      concurrency: 6
+      failFast: true
+    run: flutter pub run intl_utils:generate
+    description: Run a build_runner build in the ODM example app.
+    packageFilters:
+      dependsOn: "intl_utils"
+  sync_arb:
+    exec:
+      concurrency: 6
+      failFast: true
+    run: flutter pub run intl_utils:sync && flutter pub run intl_utils:generate
+    description: Run a build_runner build in the ODM example app.
+    packageFilters:
+      scope:
+        - "shared_str"
+  test:
+    exec:
+      concurrency: 6
+      failFast: false
+    run: flutter test --machine --coverage > tests.output
+    description: Run `flutter test` for a specific package.
+    packageFilters:
+      dir-exists:
+        - test
+  test:all:
+    run: melos run test --no-select
+    description: Run `flutter test` for a specific package.
+  gen_coverage: melos exec -c 1 -- "$MELOS_ROOT_PATH/combine_coverage.sh"
+  gen_coverage:windows: melos exec -c 1 -- "pwsh.exe -file \"$MELOS_ROOT_PATH/combine_coverage_windows.ps1\""
+  filter_coverage: melos exec -c 1 -- "lcov --extract coverage/lcov.info '**/data/repositories/*' '**/data/repository/*' -o coverage/lcov.info"
+  filter_coverage:windows: melos exec -c 1 -- "pwsh.exe -Command \"wsl -e lcov --extract coverage/lcov.info '**/data/repositories/*' '**/data/repository/*' -o coverage/lcov.info\""
+  gen_svg:
+    exec:
+      concurrency: 6
+      failFast: true
+    run: flutter pub run vector_graphics_compiler --input-dir assets/icons/vec
+    description: Generate svg precompiled for packages
+    packageFilters:
+      dependsOn:
+        - "vector_graphics_compiler"
+  env:
+    exec:
+      concurrency: 6
+      failFast: true
+    run: flutter pub run build_runner clean && flutter pub run build_runner build --delete-conflicting-outputs
+    description: Run a build_runner build in the ODM example app.
+    packageFilters:
+      dependsOn: "envied_generator"
+  clean:app:
+    exec:
+      concurrency: 6
+      failFast: false
+    run: flutter clean
+    description: Clean project
+    packageFilters:
+      fileExists:
+        - "lib/main.dart"
+  build_apk:
+    exec:
+      concurrency: 6
+      failFast: false
+    run: flutter build apk --release --obfuscate --split-debug-info=build/flutter_mapping
+    description: Run a build APK Release.
+    packageFilters:
+      fileExists:
+        - "lib/main.dart"
