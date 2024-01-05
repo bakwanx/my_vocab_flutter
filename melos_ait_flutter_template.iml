@@ -16,6 +16,12 @@
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/dependency_injection/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/dependency_injection/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/dependency_injection/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/core/service/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/core/service/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/core/service/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />

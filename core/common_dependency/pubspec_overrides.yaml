@@ -1,4 +1,12 @@
-# melos_managed_dependency_overrides: utils_app
+# melos_managed_dependency_overrides: auth,dependency_injection,master_data,service,utils_app
 dependency_overrides:
+  auth:
+    path: ..\\..\\packages\\auth
+  dependency_injection:
+    path: ..\\..\\packages\\dependency_injection
+  master_data:
+    path: ..\\master_data
+  service:
+    path: ..\\service
   utils_app:
     path: ..\\utils_app

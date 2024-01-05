@@ -1,9 +1,10 @@
 name: ait_flutter_template
 
 packages:
-  - app/**
   - core/**
   - packages/**
+  - app/**
+
 
 command:
   bootstrap:

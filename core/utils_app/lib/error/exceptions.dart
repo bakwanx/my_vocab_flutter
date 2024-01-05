@@ -1,3 +1,8 @@
-class ServerException implements Exception {}
 
-class CacheException implements Exception {}
+class ServerException implements Exception {
+  String? message;
+
+  ServerException({this.message});
+}
+
+class LocalException implements Exception {}
