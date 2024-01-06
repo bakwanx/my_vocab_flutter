@@ -226,7 +226,7 @@ packages:
     source: hosted
     version: "0.12.16"
   melos:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: melos
       sha256: "3f22f6cc629d72acf3acc8a7f8563384550290fa30790efa328c9cf606aa17d7"

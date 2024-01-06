@@ -4,7 +4,7 @@ import 'package:common_dependency/common_dependency.dart';
 import 'package:master_data/data/models/user_token_model.dart';
 
 abstract class MasterSharedPreferences {
-  Future<UserTokenModel> getUserTokenModel();
+  Future<UserTokenModel?> getUserTokenModel();
   Future<void> setUserTokenModel(UserTokenModel userTokenModel);
 }
 
@@ -16,12 +16,12 @@ class MasterLocalImpl extends MasterSharedPreferences {
   MasterLocalImpl({required this.sharedPreferences});
 
   @override
-  Future<UserTokenModel> getUserTokenModel() async {
+  Future<UserTokenModel?> getUserTokenModel() async {
     final jsonString = sharedPreferences.getString(JWT_TOKEN_KEY);
     if(jsonString != null){
       return Future.value(UserTokenModel.fromJson(jsonDecode(jsonString)));
     }
-    throw LocalException();
+    return null;
   }
 
   @override

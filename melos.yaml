@@ -3,7 +3,7 @@ name: ait_flutter_template
 packages:
   - core/**
   - packages/**
-  - app/**
+  - app/
 
 
 command:

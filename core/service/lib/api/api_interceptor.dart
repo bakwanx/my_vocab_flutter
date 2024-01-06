@@ -2,6 +2,7 @@
 
 import 'package:auth/auth.dart';
 import 'package:common_dependency/common_dependency.dart';
+import 'package:flutter/cupertino.dart';
 
 
 class ApiInterceptor extends QueuedInterceptor {
@@ -12,26 +13,40 @@ class ApiInterceptor extends QueuedInterceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     if (!options.headers.containsKey("Authorization")) {
-      final userTokenModel = await masterSharedPreferences.getUserTokenModel();
-      if (userTokenModel.token.isNotEmpty) {
-        options.headers['Authorization'] = 'Bearer ${userTokenModel.token}';
+      try{
+        final userTokenModel = await masterSharedPreferences.getUserTokenModel();
+        if (userTokenModel != null) {
+          options.headers['Authorization'] = 'Bearer ${userTokenModel.token}';
+        } else {
+          debugPrint("pesan on request interceptor userToken null");
+        }
+      }catch(e){
+        debugPrint("${e.toString()}");
       }
+
     }
     super.onRequest(options, handler);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    if(err.response?.statusCode == 400){
-      try{
+    if (err.response?.statusCode == 401) {
+      try {
         final userTokenModel = await masterSharedPreferences.getUserTokenModel();
-        final newToken = (await _getNewToken(userTokenModel.refreshToken));
-        handler.resolve(await _retry(err.requestOptions, newToken.refreshToken));
-      }catch(e){
+        final newToken = (await _getNewToken(userTokenModel!.refreshToken));
+        handler.resolve(
+          await _retry(
+            err.requestOptions,
+            newToken.refreshToken,
+          ),
+        );
+
+      } catch (e) {
         handler.next(err);
       }
+    } else {
+      return handler.next(err);
     }
-    super.onError(err, handler);
   }
 
   Future<AuthTokenResponseModel> _getNewToken(String refreshToken) async {

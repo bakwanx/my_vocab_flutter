@@ -40,6 +40,7 @@ class MyVocabScreen<BLOC extends BlocBase<STATE>, STATE extends MyVocabState>
             onError!();
             return;
           }
+
           final failure = state.errorState;
           if (exceptionErrors == null) {
             if (failure != null) {
@@ -47,27 +48,101 @@ class MyVocabScreen<BLOC extends BlocBase<STATE>, STATE extends MyVocabState>
               if (bloc is MyVocabListener) {
                 (bloc as MyVocabListener).clearErrorState();
               }
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ErrorScreen(message: "Error"),
-                ),
-              );
+              if (failure is DioException) {
+                if(failure.response != null){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext buildContext) {
+                      return AlertDialog(
+                        title: const Text('Error dialog'),
+                        content: Text(
+                          failure.response!.data["message"],
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Close'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Ok'),
+                            onPressed: () {
+                              if (isAutoClearErrorState) {
+                                final bloc = BlocProvider.of<BLOC>(context);
+                                if (bloc is MyVocabListener) {
+                                  (bloc as MyVocabListener).clearErrorState();
+                                }
+                              }
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              }
+              else if (failure is ServerException) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext buildContext) {
+                    return AlertDialog(
+                      title: const Text('Error dialog'),
+                      content: Text(
+                        failure.message.toString(),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          child: const Text('Close'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          child: const Text('Ok'),
+                          onPressed: () {
+                            if (isAutoClearErrorState) {
+                              final bloc = BlocProvider.of<BLOC>(context);
+                              if (bloc is MyVocabListener) {
+                                (bloc as MyVocabListener).clearErrorState();
+                              }
+                            }
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             } else {
               showDialog(
                 context: context,
                 builder: (BuildContext buildContext) {
                   return AlertDialog(
                     title: const Text('Error dialog'),
-                    content: const Text(
-                      'A Error',
+                    content: Text(
+                      failure.toString(),
                     ),
                     actions: <Widget>[
                       TextButton(
                         style: TextButton.styleFrom(
                           textStyle: Theme.of(context).textTheme.labelLarge,
                         ),
-                        child: const Text('Disable'),
+                        child: const Text('Close'),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -76,7 +151,7 @@ class MyVocabScreen<BLOC extends BlocBase<STATE>, STATE extends MyVocabState>
                         style: TextButton.styleFrom(
                           textStyle: Theme.of(context).textTheme.labelLarge,
                         ),
-                        child: const Text('Enable'),
+                        child: const Text('Ok'),
                         onPressed: () {
                           if (isAutoClearErrorState) {
                             final bloc = BlocProvider.of<BLOC>(context);

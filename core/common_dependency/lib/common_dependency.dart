@@ -25,6 +25,7 @@ export 'package:service/api/api_interceptor.dart';
 export 'package:dartz/dartz.dart' hide State;
 export 'package:utils_app/common/usecase.dart';
 export 'package:utils_app/network/network_info.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
 
 
 final di = GetIt.instance;

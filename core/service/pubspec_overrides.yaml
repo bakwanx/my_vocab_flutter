@@ -1,12 +1,14 @@
-# melos_managed_dependency_overrides: auth,common_dependency,dependency_injection,master_data,utils_app
+# melos_managed_dependency_overrides: auth,common_dependency,dependency_injection,master_data,utils_app,home
 dependency_overrides:
   auth:
-    path: ..\\..\\packages\\auth
+    path: ../../packages/auth
   common_dependency:
-    path: ..\\common_dependency
+    path: ../common_dependency
   dependency_injection:
-    path: ..\\..\\packages\\dependency_injection
+    path: ../../packages/dependency_injection
+  home:
+    path: ../../packages/home
   master_data:
-    path: ..\\master_data
+    path: ../master_data
   utils_app:
-    path: ..\\utils_app
+    path: ../utils_app

@@ -6,21 +6,29 @@ import 'package:meta/meta.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> with MyVocabListener {
-  final LoginUseCase loginUseCase;
+  final LoginUseCase _loginUseCase;
 
   LoginCubit({
-    required this.loginUseCase,
-  }) : super(LoginState.initial());
+    required LoginUseCase loginUseCase,
+  }) : _loginUseCase = loginUseCase, super(LoginState.initial());
 
   Future<void> login(String email, String password) async {
     emit(state.copyWith(statusLoading: true));
-    final result = await loginUseCase.call({
+    final result = await _loginUseCase.call({
       "email": email,
       "password": password
     });
     result.fold((l) {
-      emit(state.copyWith());
-    }, (r) => null);
+      emit(state.copyWith(
+        statusLoading: false,
+        exception: l,
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        statusLoading: false,
+        statusLogin: true,
+      ));
+    });
   }
 
   @override

@@ -8,7 +8,6 @@ environment:
   sdk: ">=2.19.0 <4.0.0"
 
 dependencies:
-  melos: ^3.0.1
   freezed_annotation: ^2.1.0
 
 dev_dependencies:
