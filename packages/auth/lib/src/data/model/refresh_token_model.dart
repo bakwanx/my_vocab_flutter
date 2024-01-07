@@ -1,13 +1,13 @@
-class AuthTokenResponseModel {
+class RefreshTokenModel {
   String refreshToken;
   String token;
 
-  AuthTokenResponseModel({
+  RefreshTokenModel({
     required this.refreshToken,
     required this.token,
   });
 
-  factory AuthTokenResponseModel.fromJson(Map<String, dynamic> json) => AuthTokenResponseModel(
+  factory RefreshTokenModel.fromJson(Map<String, dynamic> json) => RefreshTokenModel(
     refreshToken: json["refresh_token"],
     token: json["token"],
   );

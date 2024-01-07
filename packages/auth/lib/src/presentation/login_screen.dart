@@ -1,4 +1,4 @@
-import 'package:auth/src/domain/usecase/login_use_case.dart';
+import 'package:auth/src/domain/usecase/login_usecase.dart';
 import 'package:auth/src/presentation/cubit/login_cubit.dart';
 
 import 'package:common_dependency/common_dependency.dart';

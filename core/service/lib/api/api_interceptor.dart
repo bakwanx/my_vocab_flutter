@@ -49,13 +49,13 @@ class ApiInterceptor extends QueuedInterceptor {
     }
   }
 
-  Future<AuthTokenResponseModel> _getNewToken(String refreshToken) async {
+  Future<RefreshTokenModel> _getNewToken(String refreshToken) async {
     final uri = urlNewToken;
     try{
       final response = await dio.post(uri, data: {
         "refresh_token": refreshToken
       });
-      final result = AuthTokenResponseModel.fromJson(response.data["data"]);
+      final result = RefreshTokenModel.fromJson(response.data["data"]);
       await masterSharedPreferences.setUserTokenModel(UserTokenModel(token: result.token, refreshToken: result.refreshToken));
       return result;
     }catch(e){

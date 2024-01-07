@@ -10,3 +10,9 @@ class LocalException implements Exception {
   String? message;
   LocalException({this.message});
 }
+
+class NetworkException implements Exception {
+
+  String? message;
+  NetworkException({this.message});
+}

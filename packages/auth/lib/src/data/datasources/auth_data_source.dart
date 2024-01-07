@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:auth/src/data/model/login_model.dart';
 import 'package:auth/src/domain/entities/login_entitiy.dart';
 import 'package:common_dependency/common_dependency.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class AuthDataSource {
-  Future<Either<Exception, String>> login(LoginEntity body);
+  Future<Either<Exception, LoginModel>> login(LoginEntity body);
 }
 
 class AuthDataSourceImpl implements AuthDataSource {
@@ -13,11 +14,10 @@ class AuthDataSourceImpl implements AuthDataSource {
   AuthDataSourceImpl({required this.dio});
 
   @override
-  Future<Either<Exception, String>> login(LoginEntity body) async {
+  Future<Either<Exception, LoginModel>> login(LoginEntity body) async {
     try{
       final response = await dio.post(baseUrl + "/login", data: body.toJson());
-      final messageResponse = jsonEncode(response.data["message"]);
-      return Right(messageResponse.toString());
+      return Right(LoginModel.fromJson(response.data["data"]));
     } on DioException catch (e){
       return Left(DioException(requestOptions: e.requestOptions, response: e.response));
     } catch(e){

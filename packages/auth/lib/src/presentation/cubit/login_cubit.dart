@@ -1,4 +1,4 @@
-import 'package:auth/src/domain/usecase/login_use_case.dart';
+import 'package:auth/src/domain/usecase/login_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:common_dependency/common_dependency.dart';
 import 'package:meta/meta.dart';
