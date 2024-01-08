@@ -16,8 +16,8 @@ class UserLocalModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "id": idUser,
+    "idUser": idUser,
     "email": email,
-    "firstName": fullname,
+    "fullname": fullname,
   };
 }

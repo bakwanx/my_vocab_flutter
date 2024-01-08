@@ -37,13 +37,15 @@ class MyVocabScreen<BLOC extends BlocBase<STATE>, STATE extends MyVocabState>
       listener: (_, state) {
         if (state.errorState != null) {
           if (onError != null) {
-            onError!();
+            final bloc = BlocProvider.of<BLOC>(context);
+            onError!.call(bloc);
             return;
           }
 
           final failure = state.errorState;
           if (exceptionErrors == null) {
             if (failure != null) {
+
               final bloc = BlocProvider.of<BLOC>(context);
               if (bloc is MyVocabListener) {
                 (bloc as MyVocabListener).clearErrorState();
@@ -97,6 +99,44 @@ class MyVocabScreen<BLOC extends BlocBase<STATE>, STATE extends MyVocabState>
                       title: const Text('Error dialog'),
                       content: Text(
                         failure.message.toString(),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          child: const Text('Close'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          child: const Text('Ok'),
+                          onPressed: () {
+                            if (isAutoClearErrorState) {
+                              final bloc = BlocProvider.of<BLOC>(context);
+                              if (bloc is MyVocabListener) {
+                                (bloc as MyVocabListener).clearErrorState();
+                              }
+                            }
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext buildContext) {
+                    return AlertDialog(
+                      title: const Text('Error dialog'),
+                      content: Text(
+                        (failure as Exception).toString(),
                       ),
                       actions: <Widget>[
                         TextButton(

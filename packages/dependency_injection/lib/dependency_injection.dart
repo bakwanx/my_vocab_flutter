@@ -2,6 +2,7 @@ library dependency_injection;
 
 import 'package:auth/auth_module.dart';
 import 'package:common_dependency/common_dependency.dart';
+import 'package:home/home_module.dart';
 export 'package:dependency_injection/dependency_injection.dart';
 
 class DependencyInjector {
@@ -21,7 +22,9 @@ class DependencyInjector {
 
     // package
     final authModule = AuthModule();
+    final homeModule = HomeModule();
 
     await authModule();
+    await homeModule();
   }
 }

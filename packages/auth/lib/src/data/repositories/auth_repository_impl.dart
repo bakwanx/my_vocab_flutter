@@ -4,6 +4,7 @@ import 'package:auth/src/domain/entities/login_entitiy.dart';
 import 'package:auth/src/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:common_dependency/common_dependency.dart';
+import 'package:flutter/cupertino.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthDataSource authDataSource;
@@ -15,25 +16,30 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Exception, LoginModel>> login(LoginEntity body) async {
     if (await networkInfo.isConnected) {
-      final _result = await authDataSource.login(body);
-
-      return _result.fold((l) => Left(l), (r) {
-        masterSharedPreferences.setUserTokenModel(
-          UserTokenModel(
-            token: r.token,
-            refreshToken: r.refreshToken,
-          ),
-        );
-        masterSharedPreferences.setUserData(
-          UserLocalModel(
-            idUser: r.idUser,
-            email: r.email,
-            fullname: r.fullname,
-          ),
-        );
-        masterSharedPreferences.setStatusLogin();
-        return Right(r);
-      });
+      try{
+        final _result = await authDataSource.login(body);
+        return _result.fold((l) => Left(l), (r) {
+          masterSharedPreferences.setUserTokenModel(
+            UserTokenModel(
+              token: r.token,
+              refreshToken: r.refreshToken,
+            ),
+          );
+          masterSharedPreferences.setUserData(
+            UserLocalModel(
+              idUser: r.idUser,
+              email: r.email,
+              fullname: r.fullname,
+            ),
+          );
+          masterSharedPreferences.setStatusLogin();
+          return Right(r);
+        });
+      }on DioException catch(e){
+        return Left(e);
+      } catch (e){
+        return Left(ServerException(message: "Something when wrong"));
+      }
     } else {
       return Left(ServerException(message: "No connection"));
     }
