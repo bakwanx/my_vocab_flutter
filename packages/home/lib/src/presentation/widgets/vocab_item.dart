@@ -11,13 +11,12 @@ class VocabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 8,
+        horizontal: 12,
+        vertical: 12,
       ),
       margin: const EdgeInsets.only(
         bottom: 8,
       ),
-      height: 135,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -37,16 +36,42 @@ class VocabItem extends StatelessWidget {
             vocabEntity.vocab,
             style: Typo.body,
           ),
-          Text("data"),
-          Spacer(),
-          Text(
-            vocabEntity.typeVocab.type,
-            style: Typo.caption.copyWith(
-              fontWeight: Typo.light,
-              color: Colors.grey,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          const SizedBox(
+            height: 12,
+          ),
+          Row(
+            children: [
+              Text("Translation : ", style: Typo.h5.copyWith(
+                fontSize: 12
+              ),),
+              Text(vocabEntity.translation, style: Typo.caption,),
+            ],
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Row(
+            children: [
+              Text("Type : ", style: Typo.h5.copyWith(
+                  fontSize: 12
+              ),),
+              Text(vocabEntity.typeVocab.type, style: Typo.caption,),
+            ],
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Variation : ", style: Typo.h5.copyWith(
+                  fontSize: 12
+              ),),
+              Text(vocabEntity.variation, style: Typo.caption,),
+            ],
+          ),
+          const SizedBox(
+            height: 4,
           ),
         ],
       ),
