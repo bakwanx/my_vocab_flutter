@@ -1,3 +1,4 @@
+# melos_managed_dependency_overrides: vocab
 # melos_managed_dependency_overrides: auth,common_dependency,dependency_injection,home,master_data,service,utils_app
 dependency_overrides:
   auth:
@@ -14,3 +15,5 @@ dependency_overrides:
     path: ../../core/service
   utils_app:
     path: ../../core/utils_app
+  vocab:
+    path: ..\\vocab

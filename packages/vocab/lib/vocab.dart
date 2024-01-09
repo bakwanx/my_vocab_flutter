@@ -1,0 +1,1 @@
+export 'package:vocab/src/presentation/vocab_screen.dart';

@@ -5,6 +5,8 @@ import 'package:home/src/presentation/cubit/home_cubit.dart';
 import 'package:home/src/presentation/cubit/home_state.dart';
 import 'package:home/src/presentation/widgets/vocab_item.dart';
 import 'dart:math' as math;
+import 'package:vocab/vocab.dart';
+
 class BaseHomeScreen extends StatelessWidget {
   const BaseHomeScreen({super.key});
 
@@ -25,7 +27,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   Future<void> initData() async {
     await context.read<HomeCubit>().getVocabs();
   }
@@ -48,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     Widget body() {
-
       return BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return Container(
@@ -80,13 +80,18 @@ class _HomeScreenState extends State<HomeScreen> {
             distance: 100,
             children: [
               ActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => VocabScreen(),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.g_translate),
               ),
               ActionButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 icon: const Icon(Icons.type_specimen),
               ),
               ActionButton(
@@ -203,8 +208,8 @@ class _ExpandableFabState extends State<ExpandableFab>
     final count = widget.children.length;
     final step = 90.0 / (count - 1);
     for (var i = 0, angleInDegrees = 0.0;
-    i < count;
-    i++, angleInDegrees += step) {
+        i < count;
+        i++, angleInDegrees += step) {
       children.add(
         _ExpandingActionButton(
           directionInDegrees: angleInDegrees,
