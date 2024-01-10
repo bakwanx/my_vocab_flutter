@@ -19,4 +19,7 @@ class VocabUseCase {
   Future<Either<Exception, VocabEntity>> getDetailVocab({required int idVocab}) async {
     return vocabRepository.getDetailVocab(idVocab: idVocab);
   }
+  Future<Either<Exception, void>> patchVocab({required VocabDto vocabDto}) async {
+    return vocabRepository.patchVocab(vocabDto: vocabDto);
+  }
 }

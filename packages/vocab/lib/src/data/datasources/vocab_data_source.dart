@@ -9,6 +9,7 @@ abstract class VocabDataSource {
   Future<List<TypeVocabModel>> getTypeVocabs();
   Future<void> postVocab({required VocabDto vocabDto});
   Future<VocabModel> getDetailVocab({required int idVocab});
+  Future<void> patchVocab({required VocabDto vocabDto});
 }
 
 class VocabDataSourceImpl implements VocabDataSource {
@@ -43,6 +44,16 @@ class VocabDataSourceImpl implements VocabDataSource {
     };
     final response = await dio.get(urlGetDetailVocab, queryParameters: params);
     return VocabModel.fromJson(response.data["data"]);
+  }
+
+  @override
+  Future<void> patchVocab({required VocabDto vocabDto}) async {
+    debugPrint(vocabDto.toJson().toString());
+    final response = await dio.patch(urlPatchVocab, data: vocabDto.toJsonForPatch());
+    if(response.statusCode == 200){
+      return;
+    }
+    throw DioException(requestOptions: response.requestOptions, response: response);
   }
 
 }

@@ -1,5 +1,6 @@
 class VocabDto {
-  int idUser;
+  int? idUser;
+  int? idVocab;
   int idType;
   String translation;
   String vocab;
@@ -7,7 +8,8 @@ class VocabDto {
   String note;
 
   VocabDto({
-    required this.idUser,
+    this.idUser,
+    this.idVocab,
     required this.idType,
     required this.translation,
     required this.vocab,
@@ -26,6 +28,14 @@ class VocabDto {
 
   Map<String, dynamic> toJson() => {
     "id_user": idUser,
+    "id_type": idType,
+    "translation": translation,
+    "vocab": vocab,
+    "variation": variation,
+    "note": note,
+  };
+  Map<String, dynamic> toJsonForPatch() => {
+    "id_vocab": idVocab,
     "id_type": idType,
     "translation": translation,
     "vocab": vocab,

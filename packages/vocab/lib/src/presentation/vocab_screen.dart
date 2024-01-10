@@ -6,23 +6,26 @@ import 'package:vocab/src/presentation/cubit/vocab_state.dart';
 
 class BaseVocabScreen extends StatelessWidget {
   final int? idVocab;
+
   const BaseVocabScreen({super.key, this.idVocab});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          VocabCubit(
-            vocabUseCase: di<VocabUseCase>(),
-            masterSharedPreferences: di<MasterSharedPreferences>(),
-          ),
-      child: VocabScreen(idVocab: idVocab,),
+      create: (context) => VocabCubit(
+        vocabUseCase: di<VocabUseCase>(),
+        masterSharedPreferences: di<MasterSharedPreferences>(),
+      ),
+      child: VocabScreen(
+        idVocab: idVocab,
+      ),
     );
   }
 }
 
 class VocabScreen extends StatefulWidget {
   final int? idVocab;
+
   const VocabScreen({super.key, this.idVocab});
 
   @override
@@ -31,26 +34,26 @@ class VocabScreen extends StatefulWidget {
 
 class _VocabScreenState extends State<VocabScreen> {
   TextEditingController vocabController = TextEditingController();
-  TextEditingController noteController = TextEditingController();
-  TextEditingController variationController = TextEditingController();
   TextEditingController translationController = TextEditingController();
+  TextEditingController variationController = TextEditingController();
+  TextEditingController noteController = TextEditingController();
 
   Future<void> initData() async {
     await context.read<VocabCubit>().getTypeVocabs();
-    if(widget.idVocab != null){
+    if (widget.idVocab != null) {
       await context.read<VocabCubit>().getDetailVocab(widget.idVocab!);
+      initUi();
     }
   }
 
-  initUi(VocabState state) {
-    if(state.detailVocabEntity != null){
-      vocabController.text = state.detailVocabEntity!.vocab;
-      noteController.text = state.note!;
-      variationController.text = state.variation!;
-      translationController.text = state.translation!;
-
+  initUi() {
+    final state = context.read<VocabCubit>().state;
+    if (state.detailVocabEntity != null) {
+      vocabController = TextEditingController(text: state.detailVocabEntity!.vocab);
+      translationController = TextEditingController(text: state.detailVocabEntity!.translation);
+      variationController = TextEditingController(text: state.detailVocabEntity!.variation);
+      noteController = TextEditingController(text: state.detailVocabEntity!.note);
     }
-
   }
 
   Future<void> submit() async {
@@ -59,17 +62,22 @@ class _VocabScreenState extends State<VocabScreen> {
         translationController.text.isEmpty ||
         variationController.text.isEmpty) {
       context.read<VocabCubit>().setError(
-        Exception("Form tidak boleh kosong"),
-      );
+            Exception("Form tidak boleh kosong"),
+          );
       return;
     }
     context.read<VocabCubit>().setVocab(
-      vocab: vocabController.text,
-      translation: translationController.text,
-      note: noteController.text,
-      variation: variationController.text,
-    );
-    context.read<VocabCubit>().postVocab();
+          vocab: vocabController.text,
+          translation: translationController.text,
+          note: noteController.text,
+          variation: variationController.text,
+        );
+    if(widget.idVocab != null){
+      context.read<VocabCubit>().patchVocab(widget.idVocab!);
+    } else {
+      context.read<VocabCubit>().postVocab();
+    }
+
   }
 
   @override
@@ -84,7 +92,13 @@ class _VocabScreenState extends State<VocabScreen> {
       return AppBar(
         title: Text(
           "Vocab",
-          style: Typo.caption,
+          style: Typo.caption.copyWith(
+            fontSize: 14,
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       );
     }
@@ -126,7 +140,6 @@ class _VocabScreenState extends State<VocabScreen> {
           child: TextFormField(
             controller: translationController,
             keyboardType: TextInputType.text,
-            onChanged: (value) {},
             decoration: InputDecoration(
               labelText: "Translation",
               labelStyle: Typo.small.copyWith(
@@ -159,15 +172,14 @@ class _VocabScreenState extends State<VocabScreen> {
           child: DropdownButtonFormField(
             items: state.typeVocabEntities
                 .map(
-                  (item) =>
-                  DropdownMenuItem(
+                  (item) => DropdownMenuItem(
                     value: item,
                     child: Text(
                       item.type,
                       style: const TextStyle(fontSize: 12),
                     ),
                   ),
-            )
+                )
                 .toList(),
             validator: (value) {
               if (value == null) {
@@ -191,6 +203,9 @@ class _VocabScreenState extends State<VocabScreen> {
                 ),
               ),
             ),
+            value: widget.idVocab != null && state.detailVocabEntity != null
+                ? state.typeVocabEntities.firstWhere((element) => element.idType == state.detailVocabEntity!.idType)
+                : null,
             onChanged: (typeVocabEntity) {
               context
                   .read<VocabCubit>()
@@ -304,13 +319,13 @@ class _VocabScreenState extends State<VocabScreen> {
     return MyVocabScreen<VocabCubit, VocabState>(
       child: BlocListener<VocabCubit, VocabState>(
         listener: (context, state) {
-          if(state.isSuccess){
+          if (state.isSuccess) {
             Navigator.pop(context);
           }
         },
         child: BlocBuilder<VocabCubit, VocabState>(
           builder: (context, state) {
-            initUi(state);
+
             return Scaffold(
               appBar: appBar(),
               body: body(state),

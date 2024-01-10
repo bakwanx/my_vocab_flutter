@@ -43,8 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
       return AppBar(
         title: Text(
           "Welcome to your vocab app",
-          style: Typo.caption,
+          style: Typo.caption.copyWith(
+            fontSize: 14,
+          ),
         ),
+        automaticallyImplyLeading: false,
       );
     }
 

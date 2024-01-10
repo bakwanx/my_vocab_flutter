@@ -8,4 +8,5 @@ abstract class VocabRepository {
   Future<Either<Exception, List<TypeVocabEntity>>> getTypeVocabs();
   Future<Either<Exception, void>> postVocab({required VocabDto vocabDto});
   Future<Either<Exception, VocabEntity>> getDetailVocab({required int idVocab});
+  Future<Either<Exception, void>> patchVocab({required VocabDto vocabDto});
 }

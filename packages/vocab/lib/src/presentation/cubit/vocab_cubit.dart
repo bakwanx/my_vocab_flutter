@@ -23,7 +23,7 @@ class VocabCubit extends Cubit<VocabState> with MyVocabListener {
     result.fold((l) {
       emit(state.copyWith(statusLoading: false, exception: l));
     }, (r) {
-      emit(state.copyWith(statusLoading: false, detailVocabEntity: r));
+      emit(state.copyWith(statusLoading: false, detailVocabEntity: r, typeVocabEntity: r.typeVocab));
     });
   }
 
@@ -65,6 +65,25 @@ class VocabCubit extends Cubit<VocabState> with MyVocabListener {
     final result = await _vocabUseCase.postVocab(
         vocabDto: VocabDto(
           idUser: idUser,
+          idType: state.typeVocabEntity!.idType,
+          translation: state.translation!,
+          vocab: state.vocab!,
+          variation: state.variation!,
+          note: state.note!,
+        ));
+    result.fold((l) {
+      emit(state.copyWith(statusLoading: false, exception: l));
+    }, (r) {
+      emit(state.copyWith(statusLoading: false, isSuccess: true));
+    });
+  }
+
+  Future<void> patchVocab(int idVocab) async {
+    emit(state.copyWith(statusLoading: true));
+
+    final result = await _vocabUseCase.patchVocab(
+        vocabDto: VocabDto(
+          idVocab: idVocab,
           idType: state.typeVocabEntity!.idType,
           translation: state.translation!,
           vocab: state.vocab!,

@@ -77,5 +77,24 @@ class VocabRepositoryImpl implements VocabRepository {
     }
   }
 
+  @override
+  Future<Either<Exception, void>> patchVocab({required VocabDto vocabDto}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await vocabDataSource.patchVocab(vocabDto: vocabDto);
+        return Right(result);
+      } on DioException catch (error) {
+        return Left(DioException(
+          requestOptions: error.requestOptions,
+          message: error.message,
+        ));
+      } catch (error) {
+        return Left(Exception(error.toString()));
+      }
+    } else {
+      return Left(NetworkException(message: "No Connection"));
+    }
+  }
+
 
 }
