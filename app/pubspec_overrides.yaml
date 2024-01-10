@@ -19,4 +19,4 @@ dependency_overrides:
   utils_app:
     path: ../core/utils_app
   vocab:
-    path: ..\\packages\\vocab
+    path: ../packages/vocab

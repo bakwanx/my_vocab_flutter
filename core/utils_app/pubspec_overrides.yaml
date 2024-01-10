@@ -14,4 +14,4 @@ dependency_overrides:
   service:
     path: ../service
   vocab:
-    path: ..\\..\\packages\\vocab
+    path: ../../packages/vocab

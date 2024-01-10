@@ -11,6 +11,7 @@ class VocabScreen extends StatefulWidget {
 class _VocabScreenState extends State<VocabScreen> {
   TextEditingController vocabController = TextEditingController();
   TextEditingController noteController = TextEditingController();
+
   appBar() {
     return AppBar(
       title: Text(
@@ -104,39 +105,51 @@ class _VocabScreenState extends State<VocabScreen> {
       );
     }
 
-    Widget note(){
-      return Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(
-            top: 24,
-          ),
-          child: TextFormField(
-            maxLines: null,
-            expands: true,
-            textAlignVertical: TextAlignVertical.top,
-            controller: noteController,
-            decoration: InputDecoration(
-              labelText: "Note",
-              labelStyle: Typo.small.copyWith(
-                color: Colors.grey,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(
-                  color: primaryColor,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                  width: 1.0,
-                ),
+    Widget note() {
+      return Container(
+        height: 200,
+        margin: const EdgeInsets.only(
+          top: 24,
+        ),
+        child: TextFormField(
+          maxLines: null,
+          expands: true,
+          textAlignVertical: TextAlignVertical.top,
+          controller: noteController,
+          decoration: InputDecoration(
+            labelText: "Note",
+            labelStyle: Typo.small.copyWith(
+              color: Colors.grey,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide(
+                color: primaryColor,
               ),
             ),
-            onChanged: (value) {
-              debugPrint("pesan ${value}");
-            },
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: const BorderSide(
+                color: Colors.grey,
+                width: 1.0,
+              ),
+            ),
+          ),
+          onChanged: (value) {
+            debugPrint("pesan ${value}");
+          },
+        ),
+      );
+    }
+
+    Widget button() {
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          width: maxWidth(context),
+          child: CustomButton(
+            onPressed: () {},
+            textButton: "Simpan",
           ),
         ),
       );
@@ -147,12 +160,21 @@ class _VocabScreenState extends State<VocabScreen> {
         horizontal: defaultMargin,
         vertical: defaultMargin,
       ),
-      height: maxHeight(context),
-      child: Column(
+      child: Stack(
         children: [
-          vocab(),
-          typeVocab(),
-          note(),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                vocab(),
+                typeVocab(),
+                note(),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: button(),
+          ),
         ],
       ),
     );
@@ -161,6 +183,7 @@ class _VocabScreenState extends State<VocabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: appBar(),
       body: body(),
     );
