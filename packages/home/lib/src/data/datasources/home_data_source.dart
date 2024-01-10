@@ -18,7 +18,6 @@ class HomeDataSourceImpl implements HomeDataSource {
       "id_user": idUser,
     };
     final response = await dio.get(urlGetVocabs, queryParameters: params);
-    debugPrint("pesan userId: $params, response : ${response.data}");
     final vocabModels = response.data["data"]
         .map<VocabModel>(
             (data) => VocabModel.fromJson(data))

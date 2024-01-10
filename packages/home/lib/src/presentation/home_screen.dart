@@ -59,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: state.vocabEntities.length,
               itemBuilder: (ctx, index) {
                 return VocabItem(
+                  index: index,
                   vocabEntity: state.vocabEntities[index],
                 );
               },
@@ -84,15 +85,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => VocabScreen(),
+                      builder: (_) => BaseVocabScreen(),
                     ),
                   );
                 },
-                icon: const Icon(Icons.g_translate),
+                icon: const Icon(Icons.type_specimen),
               ),
               ActionButton(
                 onPressed: () {},
-                icon: const Icon(Icons.type_specimen),
+                icon: const Icon(Icons.merge_type),
               ),
               ActionButton(
                 onPressed: () {
