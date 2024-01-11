@@ -1,4 +1,5 @@
 import 'package:auth/src/data/datasources/auth_data_source.dart';
+import 'package:auth/src/data/model/dto/register_dto.dart';
 import 'package:auth/src/data/model/login_model.dart';
 import 'package:auth/src/domain/entities/login_entitiy.dart';
 import 'package:auth/src/domain/repositories/auth_repository.dart';
@@ -38,6 +39,24 @@ class AuthRepositoryImpl implements AuthRepository {
       }on DioException catch(e){
         return Left(e);
       } catch (e){
+        return Left(ServerException(message: "Something when wrong"));
+      }
+    } else {
+      return Left(ServerException(message: "No connection"));
+    }
+  }
+
+  @override
+  Future<Either<Exception, void>> register(RegisterDto registerDto) async {
+    if (await networkInfo.isConnected) {
+
+      try{
+        final _result = await authDataSource.register(registerDto);
+        return _result.fold((l) => Left(l), (r) => Right(r));
+      }on DioException catch(e){
+        return Left(e);
+      } catch (e){
+        debugPrint("pesan error ${e.toString()}");
         return Left(ServerException(message: "Something when wrong"));
       }
     } else {

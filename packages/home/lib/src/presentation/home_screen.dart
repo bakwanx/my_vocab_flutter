@@ -1,3 +1,4 @@
+import 'package:auth/auth.dart';
 import 'package:common_dependency/common_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:home/src/domain/usecase/home_usecase.dart';
@@ -99,10 +100,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.merge_type),
               ),
               ActionButton(
-                onPressed: () {
-
+                onPressed: () async {
+                  await context.read<HomeCubit>().logOut();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => BaseLoginScreen()),
+                    (route) => false,
+                  );
                 },
-                icon: const Icon(Icons.person),
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.red,
+                ),
               ),
             ],
           ),

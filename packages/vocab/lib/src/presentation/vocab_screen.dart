@@ -325,7 +325,6 @@ class _VocabScreenState extends State<VocabScreen> {
         },
         child: BlocBuilder<VocabCubit, VocabState>(
           builder: (context, state) {
-
             return Scaffold(
               appBar: appBar(),
               body: body(state),

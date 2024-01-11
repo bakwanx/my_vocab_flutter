@@ -3,4 +3,5 @@ import 'package:home/src/domain/entities/vocab_entity.dart';
 
 abstract class HomeRepository {
   Future<Either<Exception, List<VocabEntity>>> getVocabs();
+  Future<void> logOut();
 }

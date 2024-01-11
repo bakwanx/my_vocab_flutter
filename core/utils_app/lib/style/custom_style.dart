@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 Color primaryColor = Color(0xff0066AE);
 Color primaryLightColor = const Color(0xFF13B9FF);
-
+const double defaultRadius = 8.0;
 const double defaultMargin = 24.0;
 Color backgroundColor(BuildContext context) => Theme.of(context).scaffoldBackgroundColor;
 double maxHeight(BuildContext context) => MediaQuery.of(context).size.height;

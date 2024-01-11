@@ -22,6 +22,11 @@ class HomeCubit extends Cubit<HomeState> with MyVocabListener {
     });
   }
 
+  Future<void> logOut() async {
+    await _homeUseCase.logOut();
+    emit(state.copyWith(isLogOut: true));
+  }
+
   @override
   clearErrorState() {
     emit(state.copyWith(exception: null, statusLoading: false));

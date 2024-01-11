@@ -16,3 +16,10 @@ class NetworkException implements Exception {
   String? message;
   NetworkException({this.message});
 }
+
+class PermissionException implements Exception {
+
+  String? message;
+  PermissionException({this.message});
+}
+

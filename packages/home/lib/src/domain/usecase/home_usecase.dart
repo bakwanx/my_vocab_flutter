@@ -13,4 +13,8 @@ class HomeUseCase  {
           (r) => Right(r),
     );
   }
+
+  Future<void> logOut() async {
+    await homeRepository.logOut();
+  }
 }

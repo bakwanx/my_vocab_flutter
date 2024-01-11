@@ -10,6 +10,7 @@ abstract class MasterSharedPreferences {
   Future<void> setUserData(UserLocalModel userLocalModel);
   Future<bool> getStatusLogin();
   Future<void> setStatusLogin();
+  Future<void> logOut();
 }
 
 const JWT_TOKEN_KEY = "JWT_TOKEN_KEY";
@@ -65,6 +66,11 @@ class MasterLocalImpl extends MasterSharedPreferences {
   @override
   Future<void> setStatusLogin() {
     return sharedPreferences.setBool(STATUS_LOGIN_KEY, true);
+  }
+
+  @override
+  Future<void> logOut() async {
+    await sharedPreferences.clear();
   }
 
 

@@ -19,6 +19,9 @@ dependencies:
   service: ^0.0.1
   dependency_injection: ^0.0.1
   dartz: ^0.10.1
+  permission_handler: ^11.0.1
+  image_picker: ^1.0.4
+  image_cropper: ^5.0.0
 
 dev_dependencies:
   flutter_test:

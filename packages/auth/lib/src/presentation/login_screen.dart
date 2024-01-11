@@ -1,5 +1,6 @@
 import 'package:auth/src/domain/usecase/login_usecase.dart';
 import 'package:auth/src/presentation/cubit/login_cubit.dart';
+import 'package:auth/src/presentation/register_screen.dart';
 
 import 'package:common_dependency/common_dependency.dart';
 import 'package:flutter/material.dart';
@@ -29,25 +30,29 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   Future<void> loginHandle() async {
-    await context.read<LoginCubit>().login(
-        emailController.text, passwordController.text);
+    await context
+        .read<LoginCubit>()
+        .login(emailController.text, passwordController.text);
   }
 
   @override
   Widget build(BuildContext context) {
     return MyVocabScreen<LoginCubit, LoginState>(
-
       child: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
-          if(state.statusLogin){
-            Navigator.push(context, MaterialPageRoute(builder: (_) => BaseHomeScreen()));
+          if (state.statusLogin) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => BaseHomeScreen()));
           }
         },
         child: Scaffold(
           body: SingleChildScrollView(
             child: Container(
               margin: EdgeInsets.only(
-                  top: maxHeight(context) * 0.3, right: 10, left: 10),
+                top: maxHeight(context) * 0.3,
+                right: 10,
+                left: 10,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -126,7 +131,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 8,
                   ),
-                  Container(alignment: Alignment.center, child: Text('v.2.0.3'))
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('v.1.0.0'),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => BaseRegisterScreen()));
+                          },
+                          child: Text('Register'),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

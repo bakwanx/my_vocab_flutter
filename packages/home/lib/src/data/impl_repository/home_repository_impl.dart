@@ -40,4 +40,9 @@ class HomeRepositoryImpl implements HomeRepository {
     }
   }
 
+  @override
+  Future<void> logOut() async {
+    await masterSharedPreferences.logOut();
+  }
+
 }
