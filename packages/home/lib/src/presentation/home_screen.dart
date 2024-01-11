@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Widget body() {
       return BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) {
+        builder: (ctx, state) {
           return Container(
             margin: const EdgeInsets.symmetric(
               horizontal: defaultMargin,
@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: state.vocabEntities.length,
               itemBuilder: (ctx, index) {
                 return VocabItem(
+                  parentContext: context,
                   index: index,
                   vocabEntity: state.vocabEntities[index],
                 );
