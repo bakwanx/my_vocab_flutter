@@ -31,11 +31,11 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<Either<Exception, void>> register(RegisterDto registerDto) async {
     try{
       final response = await dio.post(baseUrl + "/register", data: registerDto.toFormData());
-      return Right(LoginModel.fromJson(response.data["message"]));
+      return Right(response.data);
     } on DioException catch (e){
       return Left(DioException(requestOptions: e.requestOptions, response: e.response));
     } catch(e){
-      return Left(ServerException(message: "Something when wrong"));
+      return Left(ServerException(message: e.toString()));
     }
   }
 
