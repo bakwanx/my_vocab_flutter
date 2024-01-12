@@ -9,167 +9,164 @@ class VocabItem extends StatelessWidget {
   final int index;
   final BuildContext parentContext;
 
-  const VocabItem(
-      {super.key,
-      required this.parentContext,
-      required this.index,
-      required this.vocabEntity});
+  const VocabItem({
+    super.key,
+    required this.parentContext,
+    required this.index,
+    required this.vocabEntity,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         showDialog(
-            context: context,
-            builder: (BuildContext ctx) {
-              return Dialog(
-                  backgroundColor: Colors.transparent,
-                  insetPadding: EdgeInsets.all(10),
-                  child: Container(
-                    width: double.infinity,
-                    height: 300,
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
+          context: context,
+          builder: (BuildContext ctx) {
+            return Dialog(
+              backgroundColor: Colors.primaries[index % Colors.primaries.length].shade100,
+              insetPadding: EdgeInsets.all(10),
+              child: SizedBox(
+                width: double.infinity,
+                height: 350,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Column(
+                          children: [
+                            Text(
+                              vocabEntity.vocab,
+                              style: Typo.h4,
+                            ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            //Name
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  vocabEntity.vocab,
-                                  style: Typo.h4,
+                                Container(
+                                  width: maxWidth(context) * 0.3,
+                                  child: Text(
+                                    'Translation',
+                                    style: Typo.h4.copyWith(fontSize: 14),
+                                  ),
                                 ),
-                                //Name
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: maxWidth(context) * 0.3,
-                                      child: Text(
-                                        'Translation',
-                                        style: Typo.small.copyWith(),
-                                      ),
-                                    ),
-                                    Text(": "),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        vocabEntity.translation,
-                                        style: Typo.small.copyWith(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        maxLines: 3,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                Text(": "),
                                 const SizedBox(
-                                  height: 4,
+                                  width: 4,
                                 ),
-                                //NIK
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: maxWidth(context) * 0.3,
-                                      child: Text(
-                                        'Type',
-                                        style: Typo.small.copyWith(),
-                                      ),
-                                    ),
-                                    Text(": "),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        vocabEntity.typeVocab.type,
-                                        style: Typo.small.copyWith(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        maxLines: 3,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                //Customer Type
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: maxWidth(context) * 0.3,
-                                      child: Text(
-                                        'Variation',
-                                        style: Typo.small.copyWith(),
-                                      ),
-                                    ),
-                                    Text(": "),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      vocabEntity.variation,
-                                      style: Typo.small.copyWith(
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      maxLines: 3,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                //Phone Number
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: maxWidth(context) * 0.3,
-                                      child: Text(
-                                        'Note',
-                                        style: Typo.small.copyWith(),
-                                      ),
-                                    ),
-                                    Text(": "),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        vocabEntity.note,
-                                        style: Typo.small.copyWith(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        maxLines: 3,
-                                      ),
-                                    ),
-                                  ],
+                                Expanded(
+                                  child: Text(
+                                    vocabEntity.translation,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            //NIK
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: maxWidth(context) * 0.3,
+                                  child: Text(
+                                    'Type',
+                                    style: Typo.h4.copyWith(fontSize: 14),
+                                  ),
+                                ),
+                                Text(": "),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    vocabEntity.typeVocab.type,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            //Customer Type
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: maxWidth(context) * 0.3,
+                                  child: Text(
+                                    'Variation',
+                                    style: Typo.h4.copyWith(fontSize: 14),
+                                  ),
+                                ),
+                                Text(": "),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  vocabEntity.variation,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            //Phone Number
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: maxWidth(context) * 0.3,
+                                  child: Text(
+                                    'Note',
+                                    style: Typo.h4.copyWith(fontSize: 14),
+                                  ),
+                                ),
+                                Text(": "),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    vocabEntity.note,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ));
-            });
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (_) => BaseVocabScreen(
-        //       idVocab: vocabEntity.idVocab,
-        //     ),
-        //   ),
-        // );
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BaseVocabScreen(
+                                  idVocab: vocabEntity.idVocab,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.app_registration)),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
       },
       child: Container(
         padding: const EdgeInsets.symmetric(
