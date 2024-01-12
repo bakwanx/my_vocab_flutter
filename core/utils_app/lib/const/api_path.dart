@@ -1,4 +1,5 @@
-String baseUrl = "http://192.168.137.1:8080";
+// String baseUrl = "http://192.168.137.1:8080";
+String baseUrl = "http://ec2-3-84-41-43.compute-1.amazonaws.com:8080";
 String urlsApi = "$baseUrl/api";
 final urlNewToken = "$baseUrl/refresh-token";
 final urlGetVocabs = "$urlsApi/vocabulary";
