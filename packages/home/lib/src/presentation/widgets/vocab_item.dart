@@ -28,7 +28,7 @@ class VocabItem extends StatelessWidget {
               insetPadding: EdgeInsets.all(10),
               child: SizedBox(
                 width: double.infinity,
-                height: 350,
+                height: 400,
                 child: Stack(
                   children: [
                     Padding(
@@ -36,8 +36,7 @@ class VocabItem extends StatelessWidget {
                         horizontal: 16,
                         vertical: 12,
                       ),
-                      child: Align(
-                        alignment: Alignment.topLeft,
+                      child: SingleChildScrollView(
                         child: Column(
                           children: [
                             Text(
