@@ -1,5 +1,4 @@
 # melos_managed_dependency_overrides: vocab
-# melos_managed_dependency_overrides: auth,common_dependency,dependency_injection,master_data,service,home
 dependency_overrides:
   auth:
     path: ../../packages/auth
