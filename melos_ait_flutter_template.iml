@@ -31,6 +31,9 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/vocab/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/vocab/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/vocab/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/webview/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/webview/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/webview/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />

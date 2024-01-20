@@ -38,6 +38,8 @@ dependencies:
   common_dependency: ^0.0.1
   vocab: ^0.0.1
   auth: ^0.0.1
+  webview: ^0.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

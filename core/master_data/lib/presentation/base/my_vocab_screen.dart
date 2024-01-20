@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'dart:math' as math show sin, pi;
+import 'package:auth/auth.dart';
 import 'package:common_dependency/common_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:master_data/presentation/base/my_vocab_listener.dart';
@@ -51,6 +52,7 @@ class MyVocabScreen<BLOC extends BlocBase<STATE>, STATE extends MyVocabState>
                 (bloc as MyVocabListener).clearErrorState();
               }
               if (failure is DioException) {
+
                 if(failure.response != null){
                   showDialog(
                     context: context,
@@ -89,6 +91,10 @@ class MyVocabScreen<BLOC extends BlocBase<STATE>, STATE extends MyVocabState>
                       );
                     },
                   );
+
+                  if(failure.response!.statusCode == 401){
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => BaseLoginScreen()), (route) => false);
+                  }
                 }
               }
               else if (failure is ServerException) {

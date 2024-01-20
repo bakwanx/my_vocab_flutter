@@ -1,18 +1,18 @@
 import 'package:common_dependency/common_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:vocab/vocab.dart';
-
+import 'dart:math';
 import '../../domain/entities/vocab_entity.dart';
 
 class VocabItem extends StatelessWidget {
   final VocabEntity vocabEntity;
-  final int index;
+  final Color colorBackground;
   final BuildContext parentContext;
 
   const VocabItem({
     super.key,
     required this.parentContext,
-    required this.index,
+    required this.colorBackground,
     required this.vocabEntity,
   });
 
@@ -24,7 +24,7 @@ class VocabItem extends StatelessWidget {
           context: context,
           builder: (BuildContext ctx) {
             return Dialog(
-              backgroundColor: Colors.primaries[index % Colors.primaries.length].shade100,
+              backgroundColor: colorBackground,
               insetPadding: EdgeInsets.all(10),
               child: SizedBox(
                 width: double.infinity,
@@ -176,7 +176,7 @@ class VocabItem extends StatelessWidget {
           bottom: 8,
         ),
         decoration: BoxDecoration(
-          color: Colors.primaries[index % Colors.primaries.length].shade100,
+          color: colorBackground,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(

@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: vocab
+# melos_managed_dependency_overrides: vocab,webview
 dependency_overrides:
   auth:
     path: ../packages/auth
@@ -18,3 +18,5 @@ dependency_overrides:
     path: ../core/utils_app
   vocab:
     path: ../packages/vocab
+  webview:
+    path: ../packages/webview

@@ -7,6 +7,7 @@ import 'package:home/src/presentation/cubit/home_state.dart';
 import 'package:home/src/presentation/widgets/vocab_item.dart';
 import 'dart:math' as math;
 import 'package:vocab/vocab.dart';
+import 'package:webview/webview_module.dart';
 
 class BaseHomeScreen extends StatelessWidget {
   const BaseHomeScreen({super.key});
@@ -27,7 +28,9 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  late TabController tabController;
+
   Future<void> initData() async {
     await context.read<HomeCubit>().getVocabs();
   }
@@ -49,26 +52,42 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: initData,
+            icon: Icon(Icons.refresh),
+          ),
+        ],
       );
     }
 
     Widget body() {
       return BlocBuilder<HomeCubit, HomeState>(
         builder: (ctx, state) {
-          return Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: defaultMargin,
-            ),
-            child: ListView.builder(
-              itemCount: state.vocabEntities.length,
-              itemBuilder: (ctx, index) {
-                return VocabItem(
-                  parentContext: context,
-                  index: index,
-                  vocabEntity: state.vocabEntities[index],
-                );
-              },
-            ),
+          tabController = TabController(
+            length: state.groupsEntities.length,
+            vsync: this,
+          );
+          return TabBarView(
+            controller: tabController,
+            children: state.groupsEntities.map((data) {
+              return Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: defaultMargin,
+                ),
+                child: ListView.builder(
+                  itemCount: data.vocabs.length,
+                  itemBuilder: (ctx, index) {
+                    Color color = Colors.primaries[index + data.sequence % Colors.primaries.length].shade100;
+                    return VocabItem(
+                      parentContext: context,
+                      colorBackground: color,
+                      vocabEntity: data.vocabs[index],
+                    );
+                  },
+                ),
+              );
+            }).toList(),
           );
         },
       );
@@ -97,17 +116,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.type_specimen),
               ),
               ActionButton(
-                onPressed: () {},
-                icon: const Icon(Icons.merge_type),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const BaseWebViewScreen(url: urlBingTranslate)));
+                },
+                icon: const Icon(Icons.translate),
               ),
               ActionButton(
-                onPressed: () async {
-                  await context.read<HomeCubit>().logOut();
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => BaseLoginScreen()),
-                    (route) => false,
-                  );
+                onPressed: () {
+                  context.read<HomeCubit>().logOut().then((value) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => BaseLoginScreen()),
+                          (route) => false,
+                    );
+                  });
                 },
                 icon: const Icon(
                   Icons.logout,
@@ -254,7 +276,7 @@ class _ExpandableFabState extends State<ExpandableFab>
           duration: const Duration(milliseconds: 250),
           child: FloatingActionButton(
             onPressed: _toggle,
-            child: const Icon(Icons.create),
+            child: const Icon(Icons.settings_accessibility_outlined),
           ),
         ),
       ),

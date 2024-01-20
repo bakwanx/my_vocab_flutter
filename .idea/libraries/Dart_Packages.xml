@@ -5,16 +5,16 @@
         <entry key="_fe_analyzer_shared">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-64.0.0/lib" />
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-65.0.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-64.0.0/lib" />
             </list>
           </value>
         </entry>
         <entry key="analyzer">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/analyzer-6.2.0/lib" />
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/analyzer-6.3.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/analyzer-6.2.0/lib" />
             </list>
           </value>
         </entry>
@@ -218,8 +218,8 @@
         <entry key="dart_style">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/dart_style-2.3.4/lib" />
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/dart_style-2.3.3/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/dart_style-2.3.4/lib" />
             </list>
           </value>
         </entry>
@@ -307,7 +307,7 @@
         <entry key="flutter">
           <value>
             <list>
-              <option value="$USER_HOME$/Development/fvm/versions/flutter_sdk/packages/flutter/lib" />
+              <option value="$USER_HOME$/fvm/versions/3.10.5/packages/flutter/lib" />
               <option value="$USER_HOME$/Development/flutter/packages/flutter/lib" />
             </list>
           </value>
@@ -336,7 +336,7 @@
         <entry key="flutter_test">
           <value>
             <list>
-              <option value="$USER_HOME$/Development/fvm/versions/flutter_sdk/packages/flutter_test/lib" />
+              <option value="$USER_HOME$/fvm/versions/3.10.5/packages/flutter_test/lib" />
               <option value="$USER_HOME$/Development/flutter/packages/flutter_test/lib" />
             </list>
           </value>
@@ -344,7 +344,7 @@
         <entry key="flutter_web_plugins">
           <value>
             <list>
-              <option value="$USER_HOME$/Development/fvm/versions/flutter_sdk/packages/flutter_web_plugins/lib" />
+              <option value="$USER_HOME$/fvm/versions/3.10.5/packages/flutter_web_plugins/lib" />
               <option value="$USER_HOME$/Development/flutter/packages/flutter_web_plugins/lib" />
             </list>
           </value>
@@ -352,8 +352,8 @@
         <entry key="freezed">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/freezed-2.4.6/lib" />
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/freezed-2.4.5/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/freezed-2.4.6/lib" />
             </list>
           </value>
         </entry>
@@ -374,8 +374,8 @@
         <entry key="get_it">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/get_it-7.6.6/lib" />
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/get_it-7.6.4/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/get_it-7.6.6/lib" />
             </list>
           </value>
         </entry>
@@ -842,7 +842,7 @@
         <entry key="sky_engine">
           <value>
             <list>
-              <option value="$USER_HOME$/Development/fvm/versions/flutter_sdk/bin/cache/pkg/sky_engine/lib" />
+              <option value="$USER_HOME$/fvm/versions/3.10.5/bin/cache/pkg/sky_engine/lib" />
               <option value="$USER_HOME$/Development/flutter/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
@@ -850,8 +850,8 @@
         <entry key="source_gen">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/source_gen-1.5.0/lib" />
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/source_gen-1.4.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/source_gen-1.5.0/lib" />
             </list>
           </value>
         </entry>
@@ -954,6 +954,35 @@
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="webview_flutter">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter-4.4.4/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="webview_flutter_android">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_android-3.13.2/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="webview_flutter_platform_interface">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_platform_interface-2.9.1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_platform_interface-2.9.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="webview_flutter_wkwebview">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.10.2/lib" />
             </list>
           </value>
         </entry>
@@ -1151,6 +1180,11 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/watcher-1.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/web-0.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter-4.4.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_android-3.13.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_platform_interface-2.9.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_platform_interface-2.9.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.10.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/win32-5.0.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xdg_directories-1.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xdg_directories-1.0.4/lib" />
@@ -1161,10 +1195,10 @@
       <root url="file://$USER_HOME$/Development/flutter/packages/flutter/lib" />
       <root url="file://$USER_HOME$/Development/flutter/packages/flutter_test/lib" />
       <root url="file://$USER_HOME$/Development/flutter/packages/flutter_web_plugins/lib" />
-      <root url="file://$USER_HOME$/Development/fvm/versions/flutter_sdk/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$USER_HOME$/Development/fvm/versions/flutter_sdk/packages/flutter/lib" />
-      <root url="file://$USER_HOME$/Development/fvm/versions/flutter_sdk/packages/flutter_test/lib" />
-      <root url="file://$USER_HOME$/Development/fvm/versions/flutter_sdk/packages/flutter_web_plugins/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.10.5/bin/cache/pkg/sky_engine/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.10.5/packages/flutter/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.10.5/packages/flutter_test/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.10.5/packages/flutter_web_plugins/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

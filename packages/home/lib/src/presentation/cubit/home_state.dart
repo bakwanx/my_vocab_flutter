@@ -6,18 +6,18 @@ class HomeState implements MyVocabState {
   final Exception? exception;
   final bool statusLoading;
   final bool isLogOut;
-  final List<VocabEntity> vocabEntities;
+  final List<GroupEntity>  groupsEntities;
   HomeState({
     required this.statusLoading,
     required this.exception,
     required this.isLogOut,
-    required this.vocabEntities,
+    required this.groupsEntities,
   });
 
   factory HomeState.initial() => HomeState(
     statusLoading: false,
     exception: null,
-    vocabEntities: [],
+    groupsEntities: [],
     isLogOut: false,
   );
 
@@ -25,12 +25,12 @@ class HomeState implements MyVocabState {
     Exception? exception,
     bool? statusLoading,
     bool? isLogOut,
-    List<VocabEntity>? vocabEntities,
+    List<GroupEntity> ? groupsEntities,
   }) =>
       HomeState(
         statusLoading: statusLoading ?? this.statusLoading,
         exception: exception ?? this.exception,
-        vocabEntities: vocabEntities ?? this.vocabEntities,
+        groupsEntities: groupsEntities ?? this.groupsEntities,
           isLogOut: isLogOut ?? this.isLogOut,
       );
 

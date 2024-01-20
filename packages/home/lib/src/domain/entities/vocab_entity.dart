@@ -1,3 +1,10 @@
+class GroupEntity {
+  int sequence;
+  List<VocabEntity> vocabs;
+
+  GroupEntity({required this.sequence, required this.vocabs});
+}
+
 class VocabEntity {
   int idVocab;
   int idUser;

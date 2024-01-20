@@ -30,6 +30,7 @@ class ApiInterceptor extends QueuedInterceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
+    debugPrint("masuk sini ${err.response!.statusCode}");
     if (err.response?.statusCode == 401) {
       try {
         final userTokenModel = await masterSharedPreferences.getUserTokenModel();
@@ -44,6 +45,7 @@ class ApiInterceptor extends QueuedInterceptor {
       } catch (e) {
         handler.next(err);
       }
+
     } else {
       return handler.next(err);
     }
