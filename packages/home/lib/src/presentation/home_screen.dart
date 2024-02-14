@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: ListView.builder(
                   itemCount: data.vocabs.length,
                   itemBuilder: (ctx, index) {
-                    Color color = Colors.primaries[index + data.sequence % Colors.primaries.length].shade100;
+                    Color color = Colors.primaries[math.Random().nextInt(17)].shade100;
                     return VocabItem(
                       parentContext: context,
                       colorBackground: color,
