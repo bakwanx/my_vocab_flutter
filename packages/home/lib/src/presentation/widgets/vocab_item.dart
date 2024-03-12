@@ -203,9 +203,12 @@ class VocabItem extends StatelessWidget {
                   "Translation : ",
                   style: Typo.h5.copyWith(fontSize: 12),
                 ),
-                Text(
-                  vocabEntity.translation,
-                  style: Typo.caption,
+                Expanded(
+                  child: Text(
+                    vocabEntity.translation,
+                    style: Typo.caption,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

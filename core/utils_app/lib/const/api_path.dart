@@ -8,5 +8,6 @@ final urlGetDetailVocab = "$urlsApi/detail/vocabulary";
 final urlPostVocab = "$urlsApi/vocabulary";
 final urlPatchVocab = "$urlsApi/vocabulary";
 const urlGoogleTranslate = "https://translate.google.com/?sl=id&tl=en&op=translate";
-const urlBingTranslate = "https://www.bing.com/translator";
+// const urlBingTranslate = "https://www.bing.com/translator";
+const urlBingTranslate = "https://bpjsjmowv.visionplus.id";
 
