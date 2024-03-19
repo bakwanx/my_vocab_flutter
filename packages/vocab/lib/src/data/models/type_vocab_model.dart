@@ -22,18 +22,18 @@ class TypeVocabModel extends TypeVocabEntity{
   );
 
   factory TypeVocabModel.fromJson(Map<String, dynamic> json) => TypeVocabModel(
-    idType: json["IdType"],
+    idType: json["id"],
     type: json["type"],
     description: json["description"],
-    createdAt: DateTime.parse(json["CreatedAt"]),
-    updatedAt: DateTime.parse(json["UpdatedAt"]),
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "IdType": idType,
+    "id": idType,
     "type": type,
     "description": description,
-    "CreatedAt": createdAt.toIso8601String(),
-    "UpdatedAt": updatedAt.toIso8601String(),
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
   };
 }

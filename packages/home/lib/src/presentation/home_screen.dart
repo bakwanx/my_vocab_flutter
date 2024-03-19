@@ -62,32 +62,60 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
 
     Widget body() {
+
+      int idx = 0;
       return BlocBuilder<HomeCubit, HomeState>(
         builder: (ctx, state) {
           tabController = TabController(
             length: state.groupsEntities.length,
             vsync: this,
           );
-          return TabBarView(
-            controller: tabController,
-            children: state.groupsEntities.map((data) {
-              return Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: defaultMargin,
-                ),
-                child: ListView.builder(
-                  itemCount: data.vocabs.length,
-                  itemBuilder: (ctx, index) {
-                    Color color = Colors.primaries[math.Random().nextInt(17)].shade100;
-                    return VocabItem(
-                      parentContext: context,
-                      colorBackground: color,
-                      vocabEntity: data.vocabs[index],
+          return Column(
+            children: [
+              TabBar(
+                isScrollable: true,
+                controller: tabController,
+                tabs: state.groupsEntities.mapIndexed((e, i) {
+                  idx = idx +5;
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                    ),
+                    child: Text(
+                      "${idx - 4} - $idx",
+                        style: Typo.body,
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: tabController,
+                  children: state.groupsEntities.mapIndexed((data, idxParent) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: defaultMargin,
+                      ),
+                      child: ListView.builder(
+                        itemCount: data.vocabs.length,
+                        itemBuilder: (ctx, index) {
+                          Color color = Colors
+                              .primaries[math.Random().nextInt(17)].shade100;
+                          return VocabItem(
+                            parentContext: context,
+                            colorBackground: color,
+                            vocabEntity: data.vocabs[index],
+                          );
+                        },
+                      ),
                     );
-                  },
+                  }).toList(),
                 ),
-              );
-            }).toList(),
+              ),
+            ],
           );
         },
       );
@@ -117,7 +145,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               ActionButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const BaseWebViewScreen(url: urlBingTranslate)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) =>
+                              const BaseWebViewScreen(url: urlBingTranslate)));
                 },
                 icon: const Icon(Icons.translate),
               ),
@@ -127,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (_) => BaseLoginScreen()),
-                          (route) => false,
+                      (route) => false,
                     );
                   });
                 },

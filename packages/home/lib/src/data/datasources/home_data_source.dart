@@ -15,7 +15,7 @@ class HomeDataSourceImpl implements HomeDataSource {
   @override
   Future<List<VocabModel>> getVocabs({required int idUser}) async {
     final params = {
-      "id_user": idUser,
+      "idUser": idUser,
     };
     final response = await dio.get(urlGetVocabs, queryParameters: params);
     final vocabModels = response.data["data"]

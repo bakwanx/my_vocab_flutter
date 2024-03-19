@@ -18,8 +18,8 @@ class VocabDto {
   });
 
   factory VocabDto.fromJson(Map<String, dynamic> json) => VocabDto(
-    idUser: json["id_user"],
-    idType: json["id_type"],
+    idUser: json["idUser"],
+    idType: json["idType"],
     translation: json["translation"],
     vocab: json["vocab"],
     variation: json["variation"],
@@ -27,16 +27,16 @@ class VocabDto {
   );
 
   Map<String, dynamic> toJson() => {
-    "id_user": idUser,
-    "id_type": idType,
+    "idUser": idUser,
+    "idType": idType,
     "translation": translation,
     "vocab": vocab,
     "variation": variation,
     "note": note,
   };
   Map<String, dynamic> toJsonForPatch() => {
-    "id_vocab": idVocab,
-    "id_type": idType,
+    "idVocab": idVocab,
+    "idType": idType,
     "translation": translation,
     "vocab": vocab,
     "variation": variation,

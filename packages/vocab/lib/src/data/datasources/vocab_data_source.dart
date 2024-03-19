@@ -40,7 +40,7 @@ class VocabDataSourceImpl implements VocabDataSource {
   @override
   Future<VocabModel> getDetailVocab({required int idVocab}) async {
     final params = {
-      "id_vocab": idVocab,
+      "idVocab": idVocab,
     };
     final response = await dio.get(urlGetDetailVocab, queryParameters: params);
     return VocabModel.fromJson(response.data["data"]);
@@ -48,7 +48,7 @@ class VocabDataSourceImpl implements VocabDataSource {
 
   @override
   Future<void> patchVocab({required VocabDto vocabDto}) async {
-    debugPrint(vocabDto.toJson().toString());
+
     final response = await dio.patch(urlPatchVocab, data: vocabDto.toJsonForPatch());
     if(response.statusCode == 200){
       return;

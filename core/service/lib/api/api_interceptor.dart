@@ -1,29 +1,28 @@
-
-
 import 'package:auth/auth.dart';
 import 'package:common_dependency/common_dependency.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class ApiInterceptor extends QueuedInterceptor {
   final Dio dio;
   final MasterSharedPreferences masterSharedPreferences;
+
   ApiInterceptor(this.dio, this.masterSharedPreferences) : super();
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     if (!options.headers.containsKey("Authorization")) {
-      try{
-        final userTokenModel = await masterSharedPreferences.getUserTokenModel();
+      try {
+        final userTokenModel =
+            await masterSharedPreferences.getUserTokenModel();
         if (userTokenModel != null) {
           options.headers['Authorization'] = 'Bearer ${userTokenModel.token}';
         } else {
           debugPrint("pesan on request interceptor userToken null");
         }
-      }catch(e){
+      } catch (e) {
         debugPrint("${e.toString()}");
       }
-
     }
     super.onRequest(options, handler);
   }
@@ -33,7 +32,8 @@ class ApiInterceptor extends QueuedInterceptor {
     debugPrint("masuk sini ${err.response!.statusCode}");
     if (err.response?.statusCode == 401) {
       try {
-        final userTokenModel = await masterSharedPreferences.getUserTokenModel();
+        final userTokenModel =
+            await masterSharedPreferences.getUserTokenModel();
         final newToken = (await _getNewToken(userTokenModel!.refreshToken));
         handler.resolve(
           await _retry(
@@ -41,29 +41,31 @@ class ApiInterceptor extends QueuedInterceptor {
             newToken.refreshToken,
           ),
         );
-
       } catch (e) {
+        await masterSharedPreferences.logOut();
         handler.next(err);
       }
-
     } else {
+      await masterSharedPreferences.logOut();
       return handler.next(err);
     }
   }
 
   Future<RefreshTokenModel> _getNewToken(String refreshToken) async {
     final uri = urlNewToken;
-    try{
+    try {
       final response = await dio.post(uri, data: {
-        "refresh_token": refreshToken
+        "refresh_token": refreshToken,
       });
       final result = RefreshTokenModel.fromJson(response.data["data"]);
-      await masterSharedPreferences.setUserTokenModel(UserTokenModel(token: result.token, refreshToken: result.refreshToken));
+      await masterSharedPreferences.setUserTokenModel(UserTokenModel(
+        token: result.token,
+        refreshToken: result.refreshToken,
+      ));
       return result;
-    }catch(e){
+    } catch (e) {
       rethrow;
     }
-
   }
 
   Future<Response<dynamic>> _retry(

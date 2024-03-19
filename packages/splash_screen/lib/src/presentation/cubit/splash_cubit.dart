@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:common_dependency/common_dependency.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:splash_screen/src/presentation/cubit/splash_state.dart';
 
@@ -17,6 +18,7 @@ class SplashCubit extends Cubit<SplashState> with MyVocabListener {
       statusLoading: false
     ));
     final result = await _masterSharedPreferences.getStatusLogin();
+    debugPrint("pesan $result");
     Timer(const Duration(seconds: 2), () {
       if(result){
         emit(state.copyWith(

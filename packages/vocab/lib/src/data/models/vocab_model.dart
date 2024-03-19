@@ -38,29 +38,29 @@ class VocabModel extends VocabEntity {
   );
 
   factory VocabModel.fromJson(Map<String, dynamic> json) => VocabModel(
-    idVocab: json["id_vocab"],
-    idUser: json["id_user"],
-    idType: json["id_type"],
-    typeVocabModel: TypeVocabModel.fromJson(json["TypeVocab"]),
+    idVocab: json["id"],
+    idUser: json["idUser"],
+    idType: json["idType"],
+    typeVocabModel: TypeVocabModel.fromJson(json["typeVocab"]),
     vocab: json["vocab"],
     translation: json["translation"],
     variation: json["variation"],
     note: json["note"],
-    createdAt: DateTime.parse(json["CreatedAt"]),
-    updatedAt: DateTime.parse(json["UpdatedAt"]),
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "id_vocab": idVocab,
-    "id_user": idUser,
-    "id_type": idType,
+    "idVocab": idVocab,
+    "idUser": idUser,
+    "idType": idType,
     "TypeVocab": typeVocabModel.toJson(),
     "vocab": vocab,
     "translation": translation,
     "variation": variation,
     "note": note,
-    "CreatedAt": createdAt.toIso8601String(),
-    "UpdatedAt": updatedAt.toIso8601String(),
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
   };
 }
 

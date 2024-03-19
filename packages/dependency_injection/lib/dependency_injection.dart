@@ -17,7 +17,7 @@ class DependencyInjector {
             () => MasterLocalImpl(sharedPreferences: di()));
     di.registerFactory(() => ApiInterceptor(dio, di()));
     dio.interceptors.addAll([
-      ApiInterceptor(di(), di()),
+      ApiInterceptor(dio, di()),
     ]);
     di.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(di()));
 

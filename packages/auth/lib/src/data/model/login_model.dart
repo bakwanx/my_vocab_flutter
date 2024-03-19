@@ -18,7 +18,7 @@ class LoginModel {
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
     email: json["email"],
     fullname: json["fullname"],
-    idUser: json["idUser"],
+    idUser: json["id"],
     profile: json["profile"],
     refreshToken: json["refresh_token"],
     token: json["token"],
@@ -27,7 +27,7 @@ class LoginModel {
   Map<String, dynamic> toJson() => {
     "email": email,
     "fullname": fullname,
-    "idUser": idUser,
+    "id": idUser,
     "profile": profile,
     "refresh_token": refreshToken,
     "token": token,
